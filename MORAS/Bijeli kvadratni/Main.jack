@@ -73,7 +73,7 @@ class Main {
     }
 
     function void drawTicks() {
-    var int cx, cy, k, idx, dx, dy, ix, iy, t, inner;
+    var int cx, cy, k, idx, dx, dy, ix, iy, t, ticksize;
 
     let cx = 256;
     let cy = 128;
@@ -88,16 +88,16 @@ class Main {
         let dy = Main.secDY(idx);
 
         
-        let inner = 100;                 
-        if (k = 0)  { let inner = 85; }   
-        if (k = 3)  { let inner = 85; }   
-        if (k = 6)  { let inner = 85; }   
-        if (k = 9)  { let inner = 85; }   
+        let ticksize = 100;                 
+        if (k = 0)  { let ticksize = 85; }   
+        if (k = 3)  { let ticksize = 85; }   
+        if (k = 6)  { let ticksize = 85; }   
+        if (k = 9)  { let ticksize = 85; }   
 
         
-        let t  = dx * inner;
+        let t  = dx * ticksize;
         let ix = t / 112;
-        let t  = dy * inner;
+        let t  = dy * ticksize;
         let iy = t / 112;
 
         
