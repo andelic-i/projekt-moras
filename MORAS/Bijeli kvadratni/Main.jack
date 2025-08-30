@@ -1,0 +1,495 @@
+class Main {
+    function void main() {
+    var int h, m, s;
+
+    // Namjesti vrijeme
+    let h = 21;
+    let m = 20;
+    let s = 37;
+
+    while (true) {
+        do Screen.clearScreen();
+        do Screen.setColor(true);
+
+        do Main.drawFrame();
+        do Main.drawTicks();
+        do Main.drawClock(h, m, s);
+        
+        do Sys.wait(1000);   
+
+        
+        let s = s + 1;
+        if (s = 60) { let s = 0; let m = m + 1; }
+        if (m = 60) { let m = 0; let h = h + 1; }
+        if (h = 24) { let h = 0; }
+    }
+
+    return;
+}
+
+
+    function void drawFrame() {
+        do Screen.drawLine(136, 8,   376, 8);   
+        do Screen.drawLine(136, 248, 376, 248); 
+        do Screen.drawLine(136, 8,   136, 248); 
+        do Screen.drawLine(376, 8,   376, 248); 
+        return;
+    }
+
+    function void drawMiddle() {
+    do Screen.drawCircle(256,128,4);
+    return;
+    }
+
+    function void drawClock(int h, int m, int s) {
+        var int cx, cy, hpos, mpos, spos, t;
+
+        let cx = 256;
+        let cy = 128;
+
+        
+        while (h > 23) { let h = h - 24; }
+        while (h < 0)  { let h = h + 24; }
+        while (m > 59) { let m = m - 60; }
+        while (m < 0)  { let m = m + 60; }
+        while (s > 59) { let s = s - 60; }
+        while (s < 0)  { let s = s + 60; }
+
+        let mpos = m;
+        let spos = s;
+
+        while (h > 11) { let h = h - 12; }
+        let t = h * 5;
+        let hpos = t + (m / 12);
+
+        
+        do Screen.drawLine(cx, cy, cx + Main.secDX(spos),  cy + Main.secDY(spos));
+        do Screen.drawLine(cx, cy, cx + Main.minDX(mpos),  cy + Main.minDY(mpos));
+        do Screen.drawLine(cx, cy, cx + Main.hourDX(hpos), cy + Main.hourDY(hpos));
+
+        do Main.drawMiddle();
+
+        return;
+    }
+
+    function void drawTicks() {
+    var int cx, cy, k, idx, dx, dy, ix, iy, t, inner;
+
+    let cx = 256;
+    let cy = 128;
+
+    
+    let k = 0;
+    while (k < 12) {
+        let idx = k * 5;
+
+        
+        let dx = Main.secDX(idx);
+        let dy = Main.secDY(idx);
+
+        
+        let inner = 100;                 
+        if (k = 0)  { let inner = 85; }   
+        if (k = 3)  { let inner = 85; }   
+        if (k = 6)  { let inner = 85; }   
+        if (k = 9)  { let inner = 85; }   
+
+        
+        let t  = dx * inner;
+        let ix = t / 112;
+        let t  = dy * inner;
+        let iy = t / 112;
+
+        
+        do Screen.drawLine(cx + ix, cy + iy, cx + dx, cy + dy);
+
+        let k = k + 1;
+    }
+
+    return;
+}
+
+
+    function int secDX(int i) {
+        if (i = 0) { return 0; }
+        if (i = 1) { return 12; }
+        if (i = 2) { return 23; }
+        if (i = 3) { return 35; }
+        if (i = 4) { return 46; }
+        if (i = 5) { return 56; }
+        if (i = 6) { return 66; }
+        if (i = 7) { return 75; }
+        if (i = 8) { return 83; }
+        if (i = 9) { return 91; }
+        if (i = 10) { return 97; }
+        if (i = 11) { return 102; }
+        if (i = 12) { return 107; }
+        if (i = 13) { return 110; }
+        if (i = 14) { return 111; }
+        if (i = 15) { return 112; }
+        if (i = 16) { return 111; }
+        if (i = 17) { return 110; }
+        if (i = 18) { return 107; }
+        if (i = 19) { return 102; }
+        if (i = 20) { return 97; }
+        if (i = 21) { return 91; }
+        if (i = 22) { return 83; }
+        if (i = 23) { return 75; }
+        if (i = 24) { return 66; }
+        if (i = 25) { return 56; }
+        if (i = 26) { return 46; }
+        if (i = 27) { return 35; }
+        if (i = 28) { return 23; }
+        if (i = 29) { return 12; }
+        if (i = 30) { return 0; }
+        if (i = 31) { return -12; }
+        if (i = 32) { return -23; }
+        if (i = 33) { return -35; }
+        if (i = 34) { return -46; }
+        if (i = 35) { return -56; }
+        if (i = 36) { return -66; }
+        if (i = 37) { return -75; }
+        if (i = 38) { return -83; }
+        if (i = 39) { return -91; }
+        if (i = 40) { return -97; }
+        if (i = 41) { return -102; }
+        if (i = 42) { return -107; }
+        if (i = 43) { return -110; }
+        if (i = 44) { return -111; }
+        if (i = 45) { return -112; }
+        if (i = 46) { return -111; }
+        if (i = 47) { return -110; }
+        if (i = 48) { return -107; }
+        if (i = 49) { return -102; }
+        if (i = 50) { return -97; }
+        if (i = 51) { return -91; }
+        if (i = 52) { return -83; }
+        if (i = 53) { return -75; }
+        if (i = 54) { return -66; }
+        if (i = 55) { return -56; }
+        if (i = 56) { return -46; }
+        if (i = 57) { return -35; }
+        if (i = 58) { return -23; }
+        if (i = 59) { return -12; }
+        return 0;
+    }
+    function int secDY(int i) {
+        if (i = 0) { return -112; }
+        if (i = 1) { return -111; }
+        if (i = 2) { return -110; }
+        if (i = 3) { return -107; }
+        if (i = 4) { return -102; }
+        if (i = 5) { return -97; }
+        if (i = 6) { return -91; }
+        if (i = 7) { return -83; }
+        if (i = 8) { return -75; }
+        if (i = 9) { return -66; }
+        if (i = 10) { return -56; }
+        if (i = 11) { return -46; }
+        if (i = 12) { return -35; }
+        if (i = 13) { return -23; }
+        if (i = 14) { return -12; }
+        if (i = 15) { return 0; }
+        if (i = 16) { return 12; }
+        if (i = 17) { return 23; }
+        if (i = 18) { return 35; }
+        if (i = 19) { return 46; }
+        if (i = 20) { return 56; }
+        if (i = 21) { return 66; }
+        if (i = 22) { return 75; }
+        if (i = 23) { return 83; }
+        if (i = 24) { return 91; }
+        if (i = 25) { return 97; }
+        if (i = 26) { return 102; }
+        if (i = 27) { return 107; }
+        if (i = 28) { return 110; }
+        if (i = 29) { return 111; }
+        if (i = 30) { return 112; }
+        if (i = 31) { return 111; }
+        if (i = 32) { return 110; }
+        if (i = 33) { return 107; }
+        if (i = 34) { return 102; }
+        if (i = 35) { return 97; }
+        if (i = 36) { return 91; }
+        if (i = 37) { return 83; }
+        if (i = 38) { return 75; }
+        if (i = 39) { return 66; }
+        if (i = 40) { return 56; }
+        if (i = 41) { return 46; }
+        if (i = 42) { return 35; }
+        if (i = 43) { return 23; }
+        if (i = 44) { return 12; }
+        if (i = 45) { return 0; }
+        if (i = 46) { return -12; }
+        if (i = 47) { return -23; }
+        if (i = 48) { return -35; }
+        if (i = 49) { return -46; }
+        if (i = 50) { return -56; }
+        if (i = 51) { return -66; }
+        if (i = 52) { return -75; }
+        if (i = 53) { return -83; }
+        if (i = 54) { return -91; }
+        if (i = 55) { return -97; }
+        if (i = 56) { return -102; }
+        if (i = 57) { return -107; }
+        if (i = 58) { return -110; }
+        if (i = 59) { return -111; }
+        return 0;
+    }
+
+    
+    function int minDX(int i) {
+        if (i = 0) { return 0; }
+        if (i = 1) { return 10; }
+        if (i = 2) { return 21; }
+        if (i = 3) { return 31; }
+        if (i = 4) { return 41; }
+        if (i = 5) { return 49; }
+        if (i = 6) { return 57; }
+        if (i = 7) { return 65; }
+        if (i = 8) { return 72; }
+        if (i = 9) { return 79; }
+        if (i = 10) { return 85; }
+        if (i = 11) { return 90; }
+        if (i = 12) { return 95; }
+        if (i = 13) { return 98; }
+        if (i = 14) { return 99; }
+        if (i = 15) { return 100; }
+        if (i = 16) { return 99; }
+        if (i = 17) { return 98; }
+        if (i = 18) { return 95; }
+        if (i = 19) { return 90; }
+        if (i = 20) { return 85; }
+        if (i = 21) { return 79; }
+        if (i = 22) { return 72; }
+        if (i = 23) { return 65; }
+        if (i = 24) { return 57; }
+        if (i = 25) { return 49; }
+        if (i = 26) { return 41; }
+        if (i = 27) { return 31; }
+        if (i = 28) { return 21; }
+        if (i = 29) { return 10; }
+        if (i = 30) { return 0; }
+        if (i = 31) { return -10; }
+        if (i = 32) { return -21; }
+        if (i = 33) { return -31; }
+        if (i = 34) { return -41; }
+        if (i = 35) { return -49; }
+        if (i = 36) { return -57; }
+        if (i = 37) { return -65; }
+        if (i = 38) { return -72; }
+        if (i = 39) { return -79; }
+        if (i = 40) { return -85; }
+        if (i = 41) { return -90; }
+        if (i = 42) { return -95; }
+        if (i = 43) { return -98; }
+        if (i = 44) { return -99; }
+        if (i = 45) { return -100; }
+        if (i = 46) { return -99; }
+        if (i = 47) { return -98; }
+        if (i = 48) { return -95; }
+        if (i = 49) { return -90; }
+        if (i = 50) { return -85; }
+        if (i = 51) { return -79; }
+        if (i = 52) { return -72; }
+        if (i = 53) { return -65; }
+        if (i = 54) { return -57; }
+        if (i = 55) { return -49; }
+        if (i = 56) { return -41; }
+        if (i = 57) { return -31; }
+        if (i = 58) { return -21; }
+        if (i = 59) { return -10; }
+        return 0;
+    }
+    function int minDY(int i) {
+        if (i = 0) { return -100; }
+        if (i = 1) { return -99; }
+        if (i = 2) { return -98; }
+        if (i = 3) { return -95; }
+        if (i = 4) { return -91; }
+        if (i = 5) { return -86; }
+        if (i = 6) { return -79; }
+        if (i = 7) { return -71; }
+        if (i = 8) { return -63; }
+        if (i = 9) { return -54; }
+        if (i = 10) { return -44; }
+        if (i = 11) { return -34; }
+        if (i = 12) { return -24; }
+        if (i = 13) { return -13; }
+        if (i = 14) { return -2; }
+        if (i = 15) { return 0; }
+        if (i = 16) { return 2; }
+        if (i = 17) { return 13; }
+        if (i = 18) { return 24; }
+        if (i = 19) { return 34; }
+        if (i = 20) { return 44; }
+        if (i = 21) { return 54; }
+        if (i = 22) { return 63; }
+        if (i = 23) { return 71; }
+        if (i = 24) { return 79; }
+        if (i = 25) { return 86; }
+        if (i = 26) { return 91; }
+        if (i = 27) { return 95; }
+        if (i = 28) { return 98; }
+        if (i = 29) { return 99; }
+        if (i = 30) { return 100; }
+        if (i = 31) { return 99; }
+        if (i = 32) { return 98; }
+        if (i = 33) { return 95; }
+        if (i = 34) { return 91; }
+        if (i = 35) { return 86; }
+        if (i = 36) { return 79; }
+        if (i = 37) { return 71; }
+        if (i = 38) { return 63; }
+        if (i = 39) { return 54; }
+        if (i = 40) { return 44; }
+        if (i = 41) { return 34; }
+        if (i = 42) { return 24; }
+        if (i = 43) { return 13; }
+        if (i = 44) { return 2; }
+        if (i = 45) { return 0; }
+        if (i = 46) { return -2; }
+        if (i = 47) { return -13; }
+        if (i = 48) { return -24; }
+        if (i = 49) { return -34; }
+        if (i = 50) { return -44; }
+        if (i = 51) { return -54; }
+        if (i = 52) { return -63; }
+        if (i = 53) { return -71; }
+        if (i = 54) { return -79; }
+        if (i = 55) { return -86; }
+        if (i = 56) { return -91; }
+        if (i = 57) { return -95; }
+        if (i = 58) { return -98; }
+        if (i = 59) { return -99; }
+        return 0;
+    }
+
+    
+    function int hourDX(int i) {
+        if (i = 0) { return 0; }
+        if (i = 1) { return 7; }
+        if (i = 2) { return 15; }
+        if (i = 3) { return 22; }
+        if (i = 4) { return 28; }
+        if (i = 5) { return 34; }
+        if (i = 6) { return 40; }
+        if (i = 7) { return 45; }
+        if (i = 8) { return 50; }
+        if (i = 9) { return 55; }
+        if (i = 10) { return 59; }
+        if (i = 11) { return 63; }
+        if (i = 12) { return 66; }
+        if (i = 13) { return 68; }
+        if (i = 14) { return 69; }
+        if (i = 15) { return 70; }
+        if (i = 16) { return 69; }
+        if (i = 17) { return 68; }
+        if (i = 18) { return 66; }
+        if (i = 19) { return 63; }
+        if (i = 20) { return 59; }
+        if (i = 21) { return 55; }
+        if (i = 22) { return 50; }
+        if (i = 23) { return 45; }
+        if (i = 24) { return 40; }
+        if (i = 25) { return 34; }
+        if (i = 26) { return 28; }
+        if (i = 27) { return 22; }
+        if (i = 28) { return 15; }
+        if (i = 29) { return 7; }
+        if (i = 30) { return 0; }
+        if (i = 31) { return -7; }
+        if (i = 32) { return -15; }
+        if (i = 33) { return -22; }
+        if (i = 34) { return -28; }
+        if (i = 35) { return -34; }
+        if (i = 36) { return -40; }
+        if (i = 37) { return -45; }
+        if (i = 38) { return -50; }
+        if (i = 39) { return -55; }
+        if (i = 40) { return -59; }
+        if (i = 41) { return -63; }
+        if (i = 42) { return -66; }
+        if (i = 43) { return -68; }
+        if (i = 44) { return -69; }
+        if (i = 45) { return -70; }
+        if (i = 46) { return -69; }
+        if (i = 47) { return -68; }
+        if (i = 48) { return -66; }
+        if (i = 49) { return -63; }
+        if (i = 50) { return -59; }
+        if (i = 51) { return -55; }
+        if (i = 52) { return -50; }
+        if (i = 53) { return -45; }
+        if (i = 54) { return -40; }
+        if (i = 55) { return -34; }
+        if (i = 56) { return -28; }
+        if (i = 57) { return -22; }
+        if (i = 58) { return -15; }
+        if (i = 59) { return -7; }
+        return 0;
+    }
+    function int hourDY(int i) {
+        if (i = 0) { return -70; }
+        if (i = 1) { return -70; }
+        if (i = 2) { return -68; }
+        if (i = 3) { return -67; }
+        if (i = 4) { return -64; }
+        if (i = 5) { return -60; }
+        if (i = 6) { return -55; }
+        if (i = 7) { return -49; }
+        if (i = 8) { return -42; }
+        if (i = 9) { return -35; }
+        if (i = 10) { return -26; }
+        if (i = 11) { return -17; }
+        if (i = 12) { return -7; }
+        if (i = 13) { return 4; }
+        if (i = 14) { return 14; }
+        if (i = 15) { return 0; }
+        if (i = 16) { return 14; }
+        if (i = 17) { return 25; }
+        if (i = 18) { return 35; }
+        if (i = 19) { return 44; }
+        if (i = 20) { return 53; }
+        if (i = 21) { return 60; }
+        if (i = 22) { return 66; }
+        if (i = 23) { return 70; }
+        if (i = 24) { return 69; }
+        if (i = 25) { return 66; }
+        if (i = 26) { return 61; }
+        if (i = 27) { return 55; }
+        if (i = 28) { return 48; }
+        if (i = 29) { return 40; }
+        if (i = 30) { return 35; }
+        if (i = 31) { return 40; }
+        if (i = 32) { return 48; }
+        if (i = 33) { return 55; }
+        if (i = 34) { return 61; }
+        if (i = 35) { return 66; }
+        if (i = 36) { return 69; }
+        if (i = 37) { return 70; }
+        if (i = 38) { return 66; }
+        if (i = 39) { return 60; }
+        if (i = 40) { return 53; }
+        if (i = 41) { return 44; }
+        if (i = 42) { return 35; }
+        if (i = 43) { return 25; }
+        if (i = 44) { return 14; }
+        if (i = 45) { return 0; }
+        if (i = 46) { return -14; }
+        if (i = 47) { return -25; }
+        if (i = 48) { return -35; }
+        if (i = 49) { return -44; }
+        if (i = 50) { return -53; }
+        if (i = 51) { return -60; }
+        if (i = 52) { return -66; }
+        if (i = 53) { return -70; }
+        if (i = 54) { return -69; }
+        if (i = 55) { return -66; }
+        if (i = 56) { return -61; }
+        if (i = 57) { return -55; }
+        if (i = 58) { return -48; }
+        if (i = 59) { return -40; }
+        return 0;
+    }
+}
